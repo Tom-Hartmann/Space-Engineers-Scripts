@@ -28,6 +28,12 @@ void QueueComponents(MyItemType component, decimal number)
     GridTerminalSystem.GetBlocksOfType(targetAssemblers, x => x.CustomName.Contains(TARGET_ASSEMBLER_NAME));
     int numAssemblers = targetAssemblers.Count;
 
+    if (numAssemblers == 0)
+    {
+        Echo($"Assembler '{TARGET_ASSEMBLER_NAME}' not found.");
+        return;  
+    }
+
     decimal splitAmount = Math.Ceiling(number / numAssemblers);
 
     foreach (var assembler in targetAssemblers)
@@ -45,6 +51,7 @@ void QueueComponents(MyItemType component, decimal number)
         }
     }
 }
+
 
 
 string ComponentToBlueprint(MyItemType component)
